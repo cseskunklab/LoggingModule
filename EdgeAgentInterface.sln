@@ -1,0 +1,86 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2041
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{34036844-64E7-43A5-9151-4AD90E180989}") = "EdgeAgentInterface", "EdgeAgentInterface\EdgeAgentInterface.iotedgeproj", "{FF5CCB94-A907-4D74-A852-B1FB03EBD59B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EdgeAgentInterfaceModule", "EdgeAgentInterfaceModule\EdgeAgentInterfaceModule.csproj", "{74131AFB-1041-4437-AF39-33F95977EEDB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandsDispatcher", "CommandsDispatcher\CommandsDispatcher.csproj", "{197BBF2B-09D7-442A-A5EB-85AD067E8204}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objects", "Objects\Objects.csproj", "{FE2C8FAB-BA44-47AD-A771-74E99086650D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Actions", "Actions\Actions.csproj", "{1B110ED9-B5B9-4F02-8248-B5EDAD688828}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandSenderModule", "CommandSenderModule\CommandSenderModule.csproj", "{E283B4B9-3EBA-480E-9246-3D2FB8471E7B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{7852F707-C8A5-40A4-A3C8-7C3D1EA9918B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FF5CCB94-A907-4D74-A852-B1FB03EBD59B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF5CCB94-A907-4D74-A852-B1FB03EBD59B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF5CCB94-A907-4D74-A852-B1FB03EBD59B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF5CCB94-A907-4D74-A852-B1FB03EBD59B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74131AFB-1041-4437-AF39-33F95977EEDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74131AFB-1041-4437-AF39-33F95977EEDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74131AFB-1041-4437-AF39-33F95977EEDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74131AFB-1041-4437-AF39-33F95977EEDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{197BBF2B-09D7-442A-A5EB-85AD067E8204}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{197BBF2B-09D7-442A-A5EB-85AD067E8204}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{197BBF2B-09D7-442A-A5EB-85AD067E8204}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{197BBF2B-09D7-442A-A5EB-85AD067E8204}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE2C8FAB-BA44-47AD-A771-74E99086650D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE2C8FAB-BA44-47AD-A771-74E99086650D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE2C8FAB-BA44-47AD-A771-74E99086650D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE2C8FAB-BA44-47AD-A771-74E99086650D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B110ED9-B5B9-4F02-8248-B5EDAD688828}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B110ED9-B5B9-4F02-8248-B5EDAD688828}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B110ED9-B5B9-4F02-8248-B5EDAD688828}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B110ED9-B5B9-4F02-8248-B5EDAD688828}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E283B4B9-3EBA-480E-9246-3D2FB8471E7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E283B4B9-3EBA-480E-9246-3D2FB8471E7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E283B4B9-3EBA-480E-9246-3D2FB8471E7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E283B4B9-3EBA-480E-9246-3D2FB8471E7B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{197BBF2B-09D7-442A-A5EB-85AD067E8204} = {7852F707-C8A5-40A4-A3C8-7C3D1EA9918B}
+		{FE2C8FAB-BA44-47AD-A771-74E99086650D} = {7852F707-C8A5-40A4-A3C8-7C3D1EA9918B}
+		{1B110ED9-B5B9-4F02-8248-B5EDAD688828} = {7852F707-C8A5-40A4-A3C8-7C3D1EA9918B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7D79DA32-779B-4979-876B-8746C26ABC4F}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://dev.azure.com/cseskunklab
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = EdgeAgentInterfaceModule\\EdgeAgentInterfaceModule.csproj
+		SccProjectName1 = EdgeAgentInterfaceModule
+		SccLocalPath1 = EdgeAgentInterfaceModule
+		SccProjectUniqueName2 = CommandsDispatcher\\CommandsDispatcher.csproj
+		SccProjectTopLevelParentUniqueName2 = EdgeAgentInterface.sln
+		SccProjectName2 = CommandsDispatcher
+		SccLocalPath2 = CommandsDispatcher
+		SccProjectUniqueName3 = Objects\\Objects.csproj
+		SccProjectTopLevelParentUniqueName3 = EdgeAgentInterface.sln
+		SccProjectName3 = Objects
+		SccLocalPath3 = Objects
+		SccProjectUniqueName4 = Actions\\Actions.csproj
+		SccProjectTopLevelParentUniqueName4 = EdgeAgentInterface.sln
+		SccProjectName4 = Actions
+		SccLocalPath4 = Actions
+		SccProjectUniqueName5 = CommandSenderModule\\CommandSenderModule.csproj
+		SccProjectName5 = CommandSenderModule
+		SccLocalPath5 = CommandSenderModule
+	EndGlobalSection
+EndGlobal
