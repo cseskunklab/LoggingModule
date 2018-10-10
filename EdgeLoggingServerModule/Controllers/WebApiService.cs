@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FieldGatewayMicroservice.Controllers
+namespace EdgeLoggingServerModule.Controllers
 {
     public abstract class WebApiService<IService> : ControllerBase
     {

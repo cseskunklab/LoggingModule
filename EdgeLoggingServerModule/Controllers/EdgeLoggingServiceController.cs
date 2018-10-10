@@ -5,17 +5,17 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using FieldGatewayMicroservice.Connections;
-using FieldGatewayMicroservice.Models;
+using EdgeLoggingServerModule.Connections;
+using EdgeLoggingService;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FieldGatewayMicroservice.Controllers
+namespace EdgeLoggingServerModule.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class EdgeLoggingServiceController : WebApiService<IEdgeLoggingService>, IEdgeLoggingService
     {
-        private string requestUrl; // = "http://echomodule:8889/api/rtuinput";
+        //private string requestUrl; // = "http://echomodule:8889/api/rtuinput";
 
 
 
@@ -29,16 +29,7 @@ namespace FieldGatewayMicroservice.Controllers
             //}
         }
 
-        //[HttpGet]
-        //public HttpResponseMessage Get()
-        //{
-        //    HttpResponseMessage response = new HttpResponseMessage();
-        //    response.Content = new StringContent("{ pie: \"hello\" }");
-        //    response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-        //    response.StatusCode = HttpStatusCode.OK;
-        //    return response;
-        //}
-
+     
         //[HttpPost]
         //public async Task Post([FromBody] byte[] value)
         //{
@@ -57,7 +48,7 @@ namespace FieldGatewayMicroservice.Controllers
 
 
         [HttpPost]
-        Task UploadFile(string sourcePath,
+        public Task UploadFile(string sourcePath,
                         string sourceFilename,
                         string containerName,
                         string targetFilename,
@@ -67,9 +58,13 @@ namespace FieldGatewayMicroservice.Controllers
             return InnerService.UploadFile(sourcePath, sourceFilename, containerName, targetFilename, contentType, append);
         }
 
-    
-       [HttpPost]
-        public Task UploadFile(string sourcePath, string sourceFilename, string sasUri, string contentType, bool append = false)
+
+        [HttpPost]
+        public Task UploadFile(string sourcePath,
+            string sourceFilename,
+            string sasUri,
+            string contentType,
+            bool append = false)
         {
             return InnerService.UploadFile(sourcePath, sourceFilename, sasUri, contentType, append);
         }

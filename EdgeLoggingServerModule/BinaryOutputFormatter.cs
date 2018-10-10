@@ -1,4 +1,4 @@
-﻿using FieldGatewayMicroservice.Connections;
+﻿using EdgeLoggingServerModule.Connections;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
 using System;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace FieldGatewayMicroservice
+namespace EdgeLoggingServerModule
 {
     public class BinaryOutputFormatter : OutputFormatter
     {

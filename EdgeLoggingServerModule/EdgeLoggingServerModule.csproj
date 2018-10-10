@@ -14,4 +14,8 @@
     <PackageReference Include="SkunkLab.Edge.Core" Version="1.0.47" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EdgeLoggingService\EdgeLoggingService.csproj" />
+  </ItemGroup>
+
 </Project>

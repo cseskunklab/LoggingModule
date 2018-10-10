@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EdgeLoggingService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace FieldGatewayMicroservice
+namespace EdgeLoggingServerModule
 {
     public class Startup
     {
@@ -15,11 +16,16 @@ namespace FieldGatewayMicroservice
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(o =>
-            {
-                o.InputFormatters.Insert(0, new BinaryInputFormatter());
-                o.OutputFormatters.Insert(0, new BinaryOutputFormatter());
-            });
+            services.AddMvc();
+            //services.AddMvc(o =>
+            //{
+            //    o.InputFormatters.Insert(0, new BinaryInputFormatter());
+            //    o.OutputFormatters.Insert(0, new BinaryOutputFormatter());
+            //});
+
+            services.AddTransient<IEdgeLoggingService, EdgeLoggingService.EdgeLoggingService>();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -30,15 +36,16 @@ namespace FieldGatewayMicroservice
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute("default", "{controller=RtuOutput}/{action=Index}/{id?}");
-            });
-
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Field Gateway Service Running...");
-            });
+            app.UseMvc();
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRoute("default", "{controller=RtuOutput}/{action=Index}/{id?}");
+            //});
+            
+            //app.Run(async (context) =>
+            //{
+            //    await context.Response.WriteAsync("Field Gateway Service Running...");
+            //});
         }
     }
 }

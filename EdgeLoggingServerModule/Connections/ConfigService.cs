@@ -11,7 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using VirtualRtu.Common.Configuration;
 
-namespace FieldGatewayMicroservice.Connections
+namespace EdgeLoggingServerModule.Connections
 {
     public class ConfigService
     {

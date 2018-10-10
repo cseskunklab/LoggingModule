@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FieldGatewayMicroservice.Connections
+namespace EdgeLoggingServerModule.Connections
 {
     public class MessageEventArgs : EventArgs
     {

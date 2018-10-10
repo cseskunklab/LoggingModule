@@ -1,7 +1,7 @@
 ﻿using System;
 using VirtualRtu.Common.Configuration;
 
-namespace FieldGatewayMicroservice.Connections
+namespace EdgeLoggingServerModule.Connections
 {
     public class ModuleConfigurationEventArgs : EventArgs
     {

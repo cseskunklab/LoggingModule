@@ -8,7 +8,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using VirtualRtu.Common.Configuration;
 
-namespace FieldGatewayMicroservice.Connections
+namespace EdgeLoggingServerModule.Connections
 {
     public class EdgeClient
     {
@@ -60,6 +60,7 @@ namespace FieldGatewayMicroservice.Connections
             }
         }
 
+        // ToDo: Add IoT Hub brokered interface here
         private static void Client_OnMessage(object sender, MessageEventArgs e)
         {
             Console.WriteLine("{0} - Received Piraeus message", DateTime.Now.ToString("hh:MM:ss.ffff"));

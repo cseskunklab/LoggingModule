@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace FieldGatewayMicroservice.Connections
+namespace EdgeLoggingServerModule.Connections
 {
     public class EdgeMqttClient
     {

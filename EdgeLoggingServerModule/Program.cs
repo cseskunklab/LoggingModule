@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using FieldGatewayMicroservice.Connections;
+using EdgeLoggingServerModule.Connections;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
@@ -17,7 +17,7 @@ using Newtonsoft.Json;
 using SkunkLab.VirtualRtu.ModBus;
 using VirtualRtu.Common.Configuration;
 
-namespace FieldGatewayMicroservice
+namespace EdgeLoggingServerModule
 {
     public class Program
     {
@@ -38,10 +38,10 @@ namespace FieldGatewayMicroservice
             //string ip = GetAddress();
             //url = "http://0.0.0.0:8888/";
 
-            configService = new ConfigService();
-            configService.OnModuleConfig += ConfigService_OnModuleConfig;
-            Task task = configService.InitAsync();
-            Task.WhenAll(task);
+            //configService = new ConfigService();
+            //configService.OnModuleConfig += ConfigService_OnModuleConfig;
+            //Task task = configService.InitAsync();
+            //Task.WhenAll(task);
 
             CreateWebHostBuilder(args).Build().Run();
         }
@@ -106,37 +106,37 @@ namespace FieldGatewayMicroservice
 
                 });
 
-        public static string GetAddress()
-        {
-            string requestUrl = null;
-            IPHostEntry entry = Dns.GetHostEntry("mbpa");
-            string ipAddressString = null;
+        //public static string GetAddress()
+        //{
+        //    string requestUrl = null;
+        //    IPHostEntry entry = Dns.GetHostEntry("mbpa");
+        //    string ipAddressString = null;
 
-            foreach (var address in entry.AddressList)
-            {
-                if (address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-                {
-                    if (address.ToString().Contains("172"))
-                    {
-                        ipAddressString = address.ToString();
-                        break;
-                    }
+        //    foreach (var address in entry.AddressList)
+        //    {
+        //        if (address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+        //        {
+        //            if (address.ToString().Contains("172"))
+        //            {
+        //                ipAddressString = address.ToString();
+        //                break;
+        //            }
 
-                }
-            }
+        //        }
+        //    }
 
-            if (ipAddressString != null)
-            {
-                requestUrl = String.Format("http://{0}:8889/api/rtuinput", ipAddressString);
-                Console.WriteLine("REQUEST URL = '{0}'", requestUrl);
-            }
-            else
-            {
-                Console.WriteLine("NO IP ADDRESS FOUND");
-            }
+        //    if (ipAddressString != null)
+        //    {
+        //        requestUrl = String.Format("http://{0}:8889/api/rtuinput", ipAddressString);
+        //        Console.WriteLine("REQUEST URL = '{0}'", requestUrl);
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("NO IP ADDRESS FOUND");
+        //    }
 
-            return requestUrl;
-        }
+        //    return requestUrl;
+        //}
 
 
     }
