@@ -11,3 +11,7 @@
 *.userprefs
 
 /.vs
+Interfaces/.vs/Interfaces/v15/Server/sqlite3/db.lock
+Interfaces/.vs/Interfaces/v15/Server/sqlite3/storage.ide
+Interfaces/.vs/Interfaces/v15/Server/sqlite3/storage.ide-shm
+Interfaces/.vs/Interfaces/v15/Server/sqlite3/storage.ide-wal
