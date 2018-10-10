@@ -3602,11 +3602,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\schneider\\LoggingModule\\DirectMethodInterface\\DirectMethodInterface.csproj",
+      "projectUniqueName": "C:\\LoggingModule\\Interfaces\\DirectMethodInterface\\DirectMethodInterface.csproj",
       "projectName": "DirectMethodInterface",
-      "projectPath": "C:\\schneider\\LoggingModule\\DirectMethodInterface\\DirectMethodInterface.csproj",
+      "projectPath": "C:\\LoggingModule\\Interfaces\\DirectMethodInterface\\DirectMethodInterface.csproj",
       "packagesPath": "C:\\Users\\kathen\\.nuget\\packages\\",
-      "outputPath": "C:\\schneider\\LoggingModule\\DirectMethodInterface\\obj\\",
+      "outputPath": "C:\\LoggingModule\\Interfaces\\DirectMethodInterface\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

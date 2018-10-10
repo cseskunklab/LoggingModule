@@ -687,11 +687,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\schneider\\LoggingModule\\LoggingInterface\\LoggingInterface.csproj",
+      "projectUniqueName": "C:\\LoggingModule\\Interfaces\\LoggingInterface\\LoggingInterface.csproj",
       "projectName": "LoggingInterface",
-      "projectPath": "C:\\schneider\\LoggingModule\\LoggingInterface\\LoggingInterface.csproj",
+      "projectPath": "C:\\LoggingModule\\Interfaces\\LoggingInterface\\LoggingInterface.csproj",
       "packagesPath": "C:\\Users\\kathen\\.nuget\\packages\\",
-      "outputPath": "C:\\schneider\\LoggingModule\\LoggingInterface\\obj\\",
+      "outputPath": "C:\\LoggingModule\\Interfaces\\LoggingInterface\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
