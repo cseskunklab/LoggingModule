@@ -1,9 +1,0 @@
-C:\Users\v-spopla\Documents\GitHub\LoggingModule\Interfaces\LogModule.EdgeHubWrapper\bin\Debug\netcoreapp2.1\LogModule.EdgeHubWrapper.deps.json
-C:\Users\v-spopla\Documents\GitHub\LoggingModule\Interfaces\LogModule.EdgeHubWrapper\bin\Debug\netcoreapp2.1\LogModule.EdgeHubWrapper.dll
-C:\Users\v-spopla\Documents\GitHub\LoggingModule\Interfaces\LogModule.EdgeHubWrapper\obj\Debug\netcoreapp2.1\LogModule.EdgeHubWrapper.csprojAssemblyReference.cache
-C:\Users\v-spopla\Documents\GitHub\LoggingModule\Interfaces\LogModule.EdgeHubWrapper\obj\Debug\netcoreapp2.1\LogModule.EdgeHubWrapper.csproj.CoreCompileInputs.cache
-C:\Users\v-spopla\Documents\GitHub\LoggingModule\Interfaces\LogModule.EdgeHubWrapper\obj\Debug\netcoreapp2.1\LogModule.EdgeHubWrapper.AssemblyInfoInputs.cache
-C:\Users\v-spopla\Documents\GitHub\LoggingModule\Interfaces\LogModule.EdgeHubWrapper\obj\Debug\netcoreapp2.1\LogModule.EdgeHubWrapper.AssemblyInfo.cs
-C:\Users\v-spopla\Documents\GitHub\LoggingModule\Interfaces\LogModule.EdgeHubWrapper\bin\Debug\netcoreapp2.1\LogModule.EdgeHubWrapper.pdb
-C:\Users\v-spopla\Documents\GitHub\LoggingModule\Interfaces\LogModule.EdgeHubWrapper\obj\Debug\netcoreapp2.1\LogModule.EdgeHubWrapper.dll
-C:\Users\v-spopla\Documents\GitHub\LoggingModule\Interfaces\LogModule.EdgeHubWrapper\obj\Debug\netcoreapp2.1\LogModule.EdgeHubWrapper.pdb

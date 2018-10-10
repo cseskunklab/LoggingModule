@@ -7,22 +7,21 @@ namespace LogModule.Core
 {
     public class LocalFileIO : RemoteFileIO, ILocal
     {
-
-    public LocalFileIO(string accountName, string accountKey)
-    : base(accountName, accountKey)
+        public LocalFileIO(string accountName, string accountKey) : base(accountName, accountKey)
         {
-
-        }   
+        }
 
         public async Task<byte[]> GetFile(string sourcePath, string sourceFilename)
-        {            
+        {
             Task<byte[]> task = Task.Factory.StartNew(() =>
             {
                 string path = fixPath(sourcePath) + sourceFilename;
+
                 return File.ReadAllBytes(path);
             });
 
             await Task.WhenAll(task);
+
             return task.Result;
         }
 
@@ -77,7 +76,7 @@ namespace LogModule.Core
 
         private static string fixPath(string sourcePath)
         {
-            return sourcePath[sourcePath.Length-1] == '/' ? sourcePath : sourcePath + "/";
+            return sourcePath[sourcePath.Length - 1] == '/' ? sourcePath : sourcePath + "/";
         }
 
         private static string getContainerName(string containerName)
