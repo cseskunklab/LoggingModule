@@ -68,7 +68,7 @@
         "schemaVersion": "1.0",
         "routes": {
           "LoggingModuleToIoTHub": "FROM /messages/modules/LoggingModule/outputs/* INTO $upstream",
-          "sensorToLoggingModuleUploadFile": "FROM /messages/modules/tempSensor/outputs/temperatureOutput INTO BrokeredEndpoint(\"/modules/LoggingModule/inputs/UploadFile\")"
+          "sensorToLoggingModuleUploadFile": "FROM /messages/modules/tempSensor/outputs/temperatureOutput INTO BrokeredEndpoint(\"/modules/LoggingModule/inputs/DownloadFile\")"
         },
         "storeAndForwardConfiguration": {
           "timeToLiveSecs": 7200

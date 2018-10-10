@@ -106,18 +106,18 @@ namespace DirectMethodInterface
             }           
         }
 
-        public Task TruncateFile(string sourcePath, string sourceFilename, int maxBytes)
-        {
-            string sourceFullPath = Path.Join(sourcePath, sourceFilename);
-            FileStream fs = new FileStream(sourceFullPath, FileMode.Open);
-            if (maxBytes < fs.Length)
-            {
-                byte[] buffer = new byte[fs.Length];
-                fs.Read(buffer, 0, (int)fs.Length);
-                fs.Close();
-                FileStream fs2 = new FileStream(sourceFullPath, FileMode.Truncate);
-                fs2.Write(buffer, (int)buffer.Length - maxBytes, buffer.Length);
-            }
-        }
+        //public Task TruncateFile(string sourcePath, string sourceFilename, int maxBytes)
+        //{
+        //    string sourceFullPath = Path.Join(sourcePath, sourceFilename);
+        //    FileStream fs = new FileStream(sourceFullPath, FileMode.Open);
+        //    if (maxBytes < fs.Length)
+        //    {
+        //        byte[] buffer = new byte[fs.Length];
+        //        fs.Read(buffer, 0, (int)fs.Length);
+        //        fs.Close();
+        //        FileStream fs2 = new FileStream(sourceFullPath, FileMode.Truncate);
+        //        fs2.Write(buffer, (int)buffer.Length - maxBytes, buffer.Length);
+        //    }
+        //}
     }
 }
