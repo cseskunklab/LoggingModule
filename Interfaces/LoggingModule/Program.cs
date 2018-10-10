@@ -8,7 +8,7 @@ namespace LoggingModule
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
-    using LogModule;
+    using LogModuleWrapper;
     using Microsoft.Azure.Devices.Client;
 
     class Program

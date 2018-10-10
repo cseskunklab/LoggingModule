@@ -5,11 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="LogModule.Core" Version="1.0.0" />
     <PackageReference Include="Microsoft.Azure.Devices.Client" Version="1.18.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\DirectMethodInterface\DirectMethodInterface.csproj" />
   </ItemGroup>
 
 </Project>

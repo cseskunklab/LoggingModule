@@ -107,6 +107,18 @@
           "lib/netstandard1.3/DotNetty.Transport.dll": {}
         }
       },
+      "LogModule.Core/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "WindowsAzure.Storage": "9.3.2"
+        },
+        "compile": {
+          "lib/netcoreapp2.1/LogModule.Core.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.1/LogModule.Core.dll": {}
+        }
+      },
       "Microsoft.Azure.Amqp/2.3.2": {
         "type": "package",
         "dependencies": {
@@ -1971,19 +1983,6 @@
         "runtime": {
           "lib/netstandard1.3/Microsoft.WindowsAzure.Storage.dll": {}
         }
-      },
-      "DirectMethodInterface/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v2.1",
-        "dependencies": {
-          "WindowsAzure.Storage": "9.3.2"
-        },
-        "compile": {
-          "bin/placeholder/DirectMethodInterface.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/DirectMethodInterface.dll": {}
-        }
       }
     }
   },
@@ -2070,6 +2069,17 @@
         "lib/net45/DotNetty.Transport.xml",
         "lib/netstandard1.3/DotNetty.Transport.dll",
         "lib/netstandard1.3/DotNetty.Transport.xml"
+      ]
+    },
+    "LogModule.Core/1.0.0": {
+      "sha512": "iSWq7sGJ/a3blzCEVl4qiQJMNDZ3ytJB3mAlb8mnV921j3x3s3h2raM3PWPwamM+9QT+FzLEj8/tH7NTSj4i7A==",
+      "type": "package",
+      "path": "logmodule.core/1.0.0",
+      "files": [
+        ".signature.p7s",
+        "lib/netcoreapp2.1/LogModule.Core.dll",
+        "logmodule.core.1.0.0.nupkg.sha512",
+        "logmodule.core.nuspec"
       ]
     },
     "Microsoft.Azure.Amqp/2.3.2": {
@@ -6513,16 +6523,11 @@
         "windowsazure.storage.9.3.2.nupkg.sha512",
         "windowsazure.storage.nuspec"
       ]
-    },
-    "DirectMethodInterface/1.0.0": {
-      "type": "project",
-      "path": "../DirectMethodInterface/DirectMethodInterface.csproj",
-      "msbuildProject": "../DirectMethodInterface/DirectMethodInterface.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
-      "DirectMethodInterface >= 1.0.0",
+      "LogModule.Core >= 1.0.0",
       "Microsoft.Azure.Devices.Client >= 1.18.0",
       "Microsoft.NETCore.App >= 2.1.0"
     ]
@@ -6557,11 +6562,7 @@
       },
       "frameworks": {
         "netcoreapp2.1": {
-          "projectReferences": {
-            "C:\\Users\\v-spopla\\Documents\\GitHub\\LoggingModule\\Interfaces\\DirectMethodInterface\\DirectMethodInterface.csproj": {
-              "projectPath": "C:\\Users\\v-spopla\\Documents\\GitHub\\LoggingModule\\Interfaces\\DirectMethodInterface\\DirectMethodInterface.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
@@ -6573,6 +6574,10 @@
     "frameworks": {
       "netcoreapp2.1": {
         "dependencies": {
+          "LogModule.Core": {
+            "target": "Package",
+            "version": "[1.0.0, )"
+          },
           "Microsoft.Azure.Devices.Client": {
             "target": "Package",
             "version": "[1.18.0, )"

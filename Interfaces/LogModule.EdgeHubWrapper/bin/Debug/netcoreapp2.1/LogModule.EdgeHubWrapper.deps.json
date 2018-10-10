@@ -1,14 +1,14 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "886310e6613631eac50d5734e7174f7384ebc18d"
+    "signature": "9b4e1c0bbbe9d70cb9db8760436ad122d8e4a74d"
   },
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v2.1": {
       "LogModule.EdgeHubWrapper/1.0.0": {
         "dependencies": {
-          "DirectMethodInterface": "1.0.0",
+          "LogModule.Core": "1.0.0",
           "Microsoft.Azure.Devices.Client": "1.18.0"
         },
         "runtime": {
@@ -105,6 +105,17 @@
           "lib/netstandard1.3/DotNetty.Transport.dll": {
             "assemblyVersion": "0.5.0.0",
             "fileVersion": "0.5.0.0"
+          }
+        }
+      },
+      "LogModule.Core/1.0.0": {
+        "dependencies": {
+          "WindowsAzure.Storage": "9.3.2"
+        },
+        "runtime": {
+          "lib/netcoreapp2.1/LogModule.Core.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
           }
         }
       },
@@ -1223,14 +1234,6 @@
             "fileVersion": "9.3.2.0"
           }
         }
-      },
-      "DirectMethodInterface/1.0.0": {
-        "dependencies": {
-          "WindowsAzure.Storage": "9.3.2"
-        },
-        "runtime": {
-          "DirectMethodInterface.dll": {}
-        }
       }
     }
   },
@@ -1281,6 +1284,13 @@
       "sha512": "sha512-3krAHBWTdLgD009kijlKJxh0ilmE06uofjxs8gwJGytALpHw/HAeDWRZ00ydzoQ6vAabfJsNUHbFHCWp9WhC4g==",
       "path": "dotnetty.transport/0.5.0",
       "hashPath": "dotnetty.transport.0.5.0.nupkg.sha512"
+    },
+    "LogModule.Core/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-iSWq7sGJ/a3blzCEVl4qiQJMNDZ3ytJB3mAlb8mnV921j3x3s3h2raM3PWPwamM+9QT+FzLEj8/tH7NTSj4i7A==",
+      "path": "logmodule.core/1.0.0",
+      "hashPath": "logmodule.core.1.0.0.nupkg.sha512"
     },
     "Microsoft.Azure.Amqp/2.3.2": {
       "type": "package",
@@ -1974,11 +1984,6 @@
       "sha512": "sha512-3MhTw6Jdh9PkaaOCYi6K/L0Bl+AbBQbD+acn4uLkIUqqC5lts8JnSUZqQygtA6zhiY2bUi7Xmspv3tdJI/qjMA==",
       "path": "windowsazure.storage/9.3.2",
       "hashPath": "windowsazure.storage.9.3.2.nupkg.sha512"
-    },
-    "DirectMethodInterface/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
     }
   }
 }

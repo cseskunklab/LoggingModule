@@ -7,6 +7,3 @@ C:\Users\v-spopla\Documents\GitHub\LoggingModule\Interfaces\LogModule.EdgeHubWra
 C:\Users\v-spopla\Documents\GitHub\LoggingModule\Interfaces\LogModule.EdgeHubWrapper\bin\Debug\netcoreapp2.1\LogModule.EdgeHubWrapper.pdb
 C:\Users\v-spopla\Documents\GitHub\LoggingModule\Interfaces\LogModule.EdgeHubWrapper\obj\Debug\netcoreapp2.1\LogModule.EdgeHubWrapper.dll
 C:\Users\v-spopla\Documents\GitHub\LoggingModule\Interfaces\LogModule.EdgeHubWrapper\obj\Debug\netcoreapp2.1\LogModule.EdgeHubWrapper.pdb
-C:\Users\v-spopla\Documents\GitHub\LoggingModule\Interfaces\LogModule.EdgeHubWrapper\bin\Debug\netcoreapp2.1\DirectMethodInterface.dll
-C:\Users\v-spopla\Documents\GitHub\LoggingModule\Interfaces\LogModule.EdgeHubWrapper\bin\Debug\netcoreapp2.1\DirectMethodInterface.pdb
-C:\Users\v-spopla\Documents\GitHub\LoggingModule\Interfaces\LogModule.EdgeHubWrapper\obj\Debug\netcoreapp2.1\LogModule.EdgeHubWrapper.csproj.CopyComplete
