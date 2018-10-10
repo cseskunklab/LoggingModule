@@ -1,15 +1,15 @@
 ﻿using System.Threading.Tasks;
-using EdgeLoggingService;
+using LogModule.Core;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EdgeLoggingServer.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class EdgeLoggingServiceController : WebApiService<IEdgeLoggingService>, IEdgeLoggingService
+    public class EdgeLoggingServiceController : WebApiService<ILocal>, ILocal
     {
 
-        public EdgeLoggingServiceController(IEdgeLoggingService edgeLoggingService) : base(edgeLoggingService)
+        public EdgeLoggingServiceController(ILocal edgeLoggingService) : base(edgeLoggingService)
         {
         }
 
@@ -46,11 +46,11 @@ namespace EdgeLoggingServer.Controllers
             return InnerService.DownloadFile(targetPath, targetFilename, containerName, filename, append);
         }
 
-        [HttpGet("sas/DownloadFile")]
-        public Task DownloadFile2(string targetPath, string targetFilename, string sasUri, bool append = false)
-        {
-            return InnerService.DownloadFile2(targetPath, targetFilename, sasUri, append);
-        }
+        //[HttpGet("sas/DownloadFile")]
+        //public Task DownloadFile(string targetPath, string targetFilename, string sasUri, bool append = false)
+        //{
+        //    return InnerService.DownloadFile(targetPath, targetFilename, sasUri, append);
+        //}
 
         [HttpGet("GetFile")]
         public Task<byte[]> GetFile(string sourcePath, string sourceFilename)
@@ -59,15 +59,15 @@ namespace EdgeLoggingServer.Controllers
         }
 
         [HttpGet("ListFiles")]
-        public Task<string[]> ListFiles(string sourcePath, string sourceFilename, int maxRows)
+        public Task<string[]> ListFiles(string sourcePath, string sourceFilename)
         {
-            return InnerService.ListFiles(sourcePath, sourceFilename, maxRows);
+            return InnerService.ListFiles(sourcePath, sourceFilename);
         }
 
         [HttpPut("WriteFile")]
-        public Task WriteFile(string sourcePath, string sourceFilename, [FromBody] byte[] fileContent)
+        public Task WriteFile(string sourcePath, string sourceFilename, [FromBody] byte[] fileContent, bool append)
         {
-            return InnerService.WriteFile(sourcePath, sourceFilename, fileContent); ;
+            return InnerService.WriteFile(sourcePath, sourceFilename, fileContent, append); 
         }
 
         [HttpDelete("RemoveFile")]
@@ -76,11 +76,11 @@ namespace EdgeLoggingServer.Controllers
             return InnerService.RemoveFile(sourcePath, sourceFilename);
         }
 
-        [HttpPut("TruncateFile")]
-        public Task TruncateFile(string sourcePath, string sourceFilename, int maxRows)
-        {
-            return InnerService.TruncateFile(sourceFilename, sourceFilename, maxRows);
-        }
+        //[HttpPut("TruncateFile")]
+        //public Task TruncateFile(string sourcePath, string sourceFilename, int maxRows)
+        //{
+        //    return InnerService.TruncateFile(sourceFilename, sourceFilename, maxRows);
+        //}
 
     }
 }
