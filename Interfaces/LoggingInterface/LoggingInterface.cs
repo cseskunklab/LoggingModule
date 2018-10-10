@@ -7,12 +7,12 @@ namespace LoggingInterface
 {
     public class LoggingInterface
     {
-        public Task<byte[]> GetFile(string sourcePath, string sourceFilename)
+        public async Task<byte[]> GetFileAsync(string sourcePath, string sourceFilename)
         {
-            return File.ReadAllBytesAsync(Path.Join(sourcePath, sourceFilename));
+            return await File.ReadAllBytesAsync(Path.Join(sourcePath, sourceFilename));
         }
 
-        public Task WriteFile(string sourcePath, string sourceFilename, byte[] body, bool append)
+        public async Task WriteFileAsync(string sourcePath, string sourceFilename, byte[] body, bool append)
         {
             string sourceFullPath = Path.Join(sourcePath, sourceFilename);
             if (append)
@@ -29,17 +29,17 @@ namespace LoggingInterface
                     stream.Write(body, 0, body.Length);
                 }
             }
-            return File.WriteAllBytesAsync(sourceFullPath, body);
+            await File.WriteAllBytesAsync(sourceFullPath, body);
         }
 
-        public void RemoveFile(string sourcePath, string sourceFilename)
+        public async Task RemoveFile(string sourcePath, string sourceFilename)
         {
-            File.Delete(Path.Join(sourcePath, sourceFilename));
+            await Task.Run(() => File.Delete(Path.Join(sourcePath, sourceFilename)));
         }
 
-        public string[] ListFiles(string sourcePath, string sourceFilename, int maxRows)
+        public async Task<string[]> ListFilesAsync(string sourcePath, string sourceFilename, int maxRows)
         {
-            return Directory.GetFiles(Path.Join(sourcePath, sourceFilename));
+            return await Task.Run(() => Directory.GetFiles(Path.Join(sourcePath, sourceFilename)));
         }
     }
 }
