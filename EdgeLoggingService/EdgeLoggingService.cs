@@ -12,7 +12,7 @@ namespace EdgeLoggingService
             return Task.CompletedTask;
         }
 
-        public Task DownloadFile(string targetPath, string targetFilename, string sasUri, bool append = false)
+        public Task DownloadFile2(string targetPath, string targetFilename, string sasUri, bool append = false)
         {
             return Task.CompletedTask;
         }
@@ -42,7 +42,7 @@ namespace EdgeLoggingService
             return Task.CompletedTask;
         }
 
-        public Task UploadFile(string sourcePath, string sourceFilename, string sasUri, string contentType, bool append = false)
+        public Task UploadFile2(string sourcePath, string sourceFilename, string sasUri, string contentType, bool append = false)
         {
             return Task.CompletedTask;
         }

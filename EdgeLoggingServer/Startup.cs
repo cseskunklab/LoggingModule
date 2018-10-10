@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace EdgeLoggingServerModule
+namespace EdgeLoggingServer
 {
     public class Startup
     {
@@ -17,12 +17,7 @@ namespace EdgeLoggingServerModule
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            //services.AddMvc(o =>
-            //{
-            //    o.InputFormatters.Insert(0, new BinaryInputFormatter());
-            //    o.OutputFormatters.Insert(0, new BinaryOutputFormatter());
-            //});
-
+        
             services.AddTransient<IEdgeLoggingService, EdgeLoggingService.EdgeLoggingService>();
 
 
@@ -37,15 +32,7 @@ namespace EdgeLoggingServerModule
             }
 
             app.UseMvc();
-            //app.UseMvc(routes =>
-            //{
-            //    routes.MapRoute("default", "{controller=RtuOutput}/{action=Index}/{id?}");
-            //});
-            
-            //app.Run(async (context) =>
-            //{
-            //    await context.Response.WriteAsync("Field Gateway Service Running...");
-            //});
+       
         }
     }
 }
