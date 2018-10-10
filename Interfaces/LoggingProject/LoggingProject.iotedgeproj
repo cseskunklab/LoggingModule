@@ -19,6 +19,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CommandsSenderModule\CommandsSenderModule.csproj" />
     <ProjectReference Include="..\LoggingModule\LoggingModule.csproj" />
   </ItemGroup>
   <Import Project="..\packages\Microsoft.VisualStudio.Azure.IoT.Edge.MSBuildTasks.0.0.1\build\AzureIoTEdgeProject.Build.targets" />

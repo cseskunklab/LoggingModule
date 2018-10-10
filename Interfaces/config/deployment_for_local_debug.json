@@ -39,26 +39,6 @@
               "image": "mcr.microsoft.com/azureiotedge-simulated-temperature-sensor:1.0",
               "createOptions": ""
             }
-          },
-          "LoggingModule": {
-            "version": "1.0.0",
-            "type": "docker",
-            "status": "running",
-            "restartPolicy": "always",
-            "settings": {
-              "image": "${MODULES.LoggingModule}",
-              "createOptions": ""
-            }
-          },
-          "CommandsSenderModule": {
-            "version": "1.0.0",
-            "type": "docker",
-            "status": "running",
-            "restartPolicy": "always",
-            "settings": {
-              "image": "${MODULES.CommandsSenderModule}",
-              "createOptions": ""
-            }
           }
         }
       }
@@ -68,7 +48,9 @@
         "schemaVersion": "1.0",
         "routes": {
           "LoggingModuleToIoTHub": "FROM /messages/modules/LoggingModule/outputs/* INTO $upstream",
-          "sensorToLoggingModuleUploadFile": "FROM /messages/modules/tempSensor/outputs/temperatureOutput INTO BrokeredEndpoint(\"/modules/LoggingModule/inputs/UploadFile\")"
+          "sensorToLoggingModuleUploadFile": "FROM /messages/modules/tempSensor/outputs/temperatureOutput INTO BrokeredEndpoint(\"/modules/LoggingModule/inputs/UploadFile\")",
+          "CommandSenderToUploadFile": "FROM /messages/modules/CommandsSenderModule/outputs/output1 INTO BrokeredEndpoint(\"/modules/LoggingModule/inputs/UploadFile\")",
+          "CommandsSenderModuleToIoTHub": "FROM /messages/modules/CommandsSenderModule/outputs/* INTO $upstream"
         },
         "storeAndForwardConfiguration": {
           "timeToLiveSecs": 7200

@@ -7,3 +7,12 @@ C:\Users\mumalhot\Documents\GitHub\LoggingModule\Interfaces\DirectMethodInterfac
 C:\Users\mumalhot\Documents\GitHub\LoggingModule\Interfaces\DirectMethodInterface\obj\Debug\netcoreapp2.1\DirectMethodInterface.csproj.CoreCompileInputs.cache
 C:\Users\mumalhot\Documents\GitHub\LoggingModule\Interfaces\DirectMethodInterface\obj\Debug\netcoreapp2.1\DirectMethodInterface.AssemblyInfoInputs.cache
 C:\Users\mumalhot\Documents\GitHub\LoggingModule\Interfaces\DirectMethodInterface\obj\Debug\netcoreapp2.1\DirectMethodInterface.AssemblyInfo.cs
+C:\Users\v-spopla\Documents\GitHub\LoggingModule\Interfaces\DirectMethodInterface\obj\Debug\netcoreapp2.1\DirectMethodInterface.csprojAssemblyReference.cache
+C:\Users\v-spopla\Documents\GitHub\LoggingModule\Interfaces\DirectMethodInterface\obj\Debug\netcoreapp2.1\DirectMethodInterface.csproj.CoreCompileInputs.cache
+C:\Users\v-spopla\Documents\GitHub\LoggingModule\Interfaces\DirectMethodInterface\obj\Debug\netcoreapp2.1\DirectMethodInterface.AssemblyInfoInputs.cache
+C:\Users\v-spopla\Documents\GitHub\LoggingModule\Interfaces\DirectMethodInterface\obj\Debug\netcoreapp2.1\DirectMethodInterface.AssemblyInfo.cs
+C:\Users\v-spopla\Documents\GitHub\LoggingModule\Interfaces\DirectMethodInterface\bin\Debug\netcoreapp2.1\DirectMethodInterface.deps.json
+C:\Users\v-spopla\Documents\GitHub\LoggingModule\Interfaces\DirectMethodInterface\bin\Debug\netcoreapp2.1\DirectMethodInterface.dll
+C:\Users\v-spopla\Documents\GitHub\LoggingModule\Interfaces\DirectMethodInterface\bin\Debug\netcoreapp2.1\DirectMethodInterface.pdb
+C:\Users\v-spopla\Documents\GitHub\LoggingModule\Interfaces\DirectMethodInterface\obj\Debug\netcoreapp2.1\DirectMethodInterface.dll
+C:\Users\v-spopla\Documents\GitHub\LoggingModule\Interfaces\DirectMethodInterface\obj\Debug\netcoreapp2.1\DirectMethodInterface.pdb

@@ -8,4 +8,8 @@
     <PackageReference Include="Microsoft.Azure.Devices.Client" Version="1.18.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DirectMethodInterface\DirectMethodInterface.csproj" />
+  </ItemGroup>
+
 </Project>

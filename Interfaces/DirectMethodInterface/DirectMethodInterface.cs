@@ -110,7 +110,7 @@ namespace DirectMethodInterface
         {
             string sourceFullPath = Path.Join(sourcePath, sourceFilename);
             FileStream fs = new FileStream(sourceFullPath, FileMode.Open);
-            if(maxBytes < fs.Length)
+            if (maxBytes < fs.Length)
             {
                 byte[] buffer = new byte[fs.Length];
                 fs.Read(buffer, 0, (int)fs.Length);
