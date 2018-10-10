@@ -71,20 +71,20 @@ namespace DirectMethodInterface
                     path = targetFilename;
                 }
             }
+
+            return path;
         }
 
         public async Task UploadFile(string sourcePath, string sourceFilename, string containerName, string targetFilename, string contentType, bool append=false)
         {
-            string canonicalContainerName = getContainerName(containerName);
-            string targetFilePath = getFilepathForContainer(containerName, targetFilename);
 
             byte[] fileContent = File.ReadAllBytes(Path.Join(fixPath(sourcePath), sourceFilename));
             CloudStorageAccount account = CloudStorageAccount.Parse(storageConnectionString);
             CloudBlobClient serviceClient = account.CreateCloudBlobClient();
 
-            var container = serviceClient.GetContainerReference(getContainerName(canonicalContainerName));
+            var container = serviceClient.GetContainerReference(getContainerName(containerName));
             container.CreateIfNotExistsAsync().Wait();
-            CloudAppendBlob blob = container.GetAppendBlobReference(targetFilePath);
+            CloudAppendBlob blob = container.GetAppendBlobReference(getFilepathForContainer(containerName, targetFilename));
 
             if (!append)
             {
@@ -103,7 +103,7 @@ namespace DirectMethodInterface
 
         public async Task UploadFile(string sourcePath, string sourceFilename, string sasUri, string contentType, bool append=false)
         {
-            byte[] fileContent = File.ReadAllBytes(Path.Join(sourcePath, sourceFilename));
+            byte[] fileContent = File.ReadAllBytes(Path.Join(fixPath(sourcePath), sourceFilename));
             CloudAppendBlob blob = new CloudAppendBlob(new Uri(sasUri));
 
             if (!append)
@@ -123,15 +123,13 @@ namespace DirectMethodInterface
         
         public async Task DownloadFile(string targetPath, string targetFilename, string containerName, string filename, bool append=false)
         {
-            string canonicalContainerName = getContainerName(containerName);
-            string containerFilePath = getFilepathForContainer(containerName, filename);
 
-            string targetFullPath = Path.Join(targetPath, targetFilename);
+            string targetFullPath = Path.Join(fixPath(targetPath), targetFilename);
             CloudStorageAccount account = CloudStorageAccount.Parse(storageConnectionString);
             CloudBlobClient serviceClient = account.CreateCloudBlobClient();
 
-            var container = serviceClient.GetContainerReference(canonicalContainerName);
-            CloudAppendBlob blob = container.GetAppendBlobReference(containerFilePath);
+            var container = serviceClient.GetContainerReference(getContainerName(containerName));
+            CloudAppendBlob blob = container.GetAppendBlobReference(getFilepathForContainer(containerName, filename));
 
             if (!append)
             {
@@ -149,7 +147,7 @@ namespace DirectMethodInterface
 
         public async Task DownloadFile(string targetPath, string targetFilename, string sasUri, bool append=false)
         {
-            string targetFullPath = Path.Join(targetPath, targetFilename);
+            string targetFullPath = Path.Join(fixPath(targetPath), targetFilename);
             CloudAppendBlob blob = new CloudAppendBlob(new Uri(sasUri));
 
             if (!append)
@@ -168,7 +166,7 @@ namespace DirectMethodInterface
 
         public async Task TruncateFile(string sourcePath, string sourceFilename, int maxBytes)
         {
-            string sourceFullPath = Path.Join(sourcePath, sourceFilename);
+            string sourceFullPath = Path.Join(fixPath(sourcePath), sourceFilename);
             using (var stream = new FileStream(sourceFullPath, FileMode.Open))
             {
                 byte[] buffer = new byte[stream.Length];
