@@ -1,0 +1,9 @@
+C:\Users\mumalhot\Documents\GitHub\LoggingModule\Interfaces\LoggingInterface\bin\Debug\netcoreapp2.1\LoggingInterface.deps.json
+C:\Users\mumalhot\Documents\GitHub\LoggingModule\Interfaces\LoggingInterface\bin\Debug\netcoreapp2.1\LoggingInterface.dll
+C:\Users\mumalhot\Documents\GitHub\LoggingModule\Interfaces\LoggingInterface\bin\Debug\netcoreapp2.1\LoggingInterface.pdb
+C:\Users\mumalhot\Documents\GitHub\LoggingModule\Interfaces\LoggingInterface\obj\Debug\netcoreapp2.1\LoggingInterface.csprojAssemblyReference.cache
+C:\Users\mumalhot\Documents\GitHub\LoggingModule\Interfaces\LoggingInterface\obj\Debug\netcoreapp2.1\LoggingInterface.csproj.CoreCompileInputs.cache
+C:\Users\mumalhot\Documents\GitHub\LoggingModule\Interfaces\LoggingInterface\obj\Debug\netcoreapp2.1\LoggingInterface.AssemblyInfoInputs.cache
+C:\Users\mumalhot\Documents\GitHub\LoggingModule\Interfaces\LoggingInterface\obj\Debug\netcoreapp2.1\LoggingInterface.AssemblyInfo.cs
+C:\Users\mumalhot\Documents\GitHub\LoggingModule\Interfaces\LoggingInterface\obj\Debug\netcoreapp2.1\LoggingInterface.dll
+C:\Users\mumalhot\Documents\GitHub\LoggingModule\Interfaces\LoggingInterface\obj\Debug\netcoreapp2.1\LoggingInterface.pdb

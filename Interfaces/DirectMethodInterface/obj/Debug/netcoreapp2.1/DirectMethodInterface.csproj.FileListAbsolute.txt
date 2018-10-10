@@ -3,3 +3,7 @@ C:\schneider\LoggingModule\DirectMethodInterface\bin\Debug\netcoreapp2.1\DirectM
 C:\schneider\LoggingModule\DirectMethodInterface\obj\Debug\netcoreapp2.1\DirectMethodInterface.csproj.CoreCompileInputs.cache
 C:\schneider\LoggingModule\DirectMethodInterface\obj\Debug\netcoreapp2.1\DirectMethodInterface.AssemblyInfoInputs.cache
 C:\schneider\LoggingModule\DirectMethodInterface\obj\Debug\netcoreapp2.1\DirectMethodInterface.AssemblyInfo.cs
+C:\Users\mumalhot\Documents\GitHub\LoggingModule\Interfaces\DirectMethodInterface\obj\Debug\netcoreapp2.1\DirectMethodInterface.csprojAssemblyReference.cache
+C:\Users\mumalhot\Documents\GitHub\LoggingModule\Interfaces\DirectMethodInterface\obj\Debug\netcoreapp2.1\DirectMethodInterface.csproj.CoreCompileInputs.cache
+C:\Users\mumalhot\Documents\GitHub\LoggingModule\Interfaces\DirectMethodInterface\obj\Debug\netcoreapp2.1\DirectMethodInterface.AssemblyInfoInputs.cache
+C:\Users\mumalhot\Documents\GitHub\LoggingModule\Interfaces\DirectMethodInterface\obj\Debug\netcoreapp2.1\DirectMethodInterface.AssemblyInfo.cs
