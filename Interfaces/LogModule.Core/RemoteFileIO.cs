@@ -48,6 +48,30 @@ namespace LogModule.Core
             await Task.WhenAll(task);
         }
 
+        public async Task DownloadFile(string targetPath, string targetFilename, string sasUri, bool append = false)
+        {
+            Task task = Task.Factory.StartNew(() =>
+            {
+                string targetFullPath = Path.Join(fixPath(targetPath), targetFilename);
+                CloudAppendBlob blob = new CloudAppendBlob(new Uri(sasUri));
+
+                if (!append)
+                {
+                    blob.DownloadToFileAsync(targetFullPath, FileMode.Create);
+                }
+                else
+                {
+                    if (!blob.ExistsAsync().Result)
+                    {
+                        throw new Exception($"Cannot download nonexistent blob file {targetFilename}");
+                    }
+                    blob.DownloadToFileAsync(targetFullPath, FileMode.Append);
+                }
+            });
+
+            await Task.WhenAll(task);
+        }
+
         public async Task UploadFile(string sourcePath, string sourceFilename, string containerName, string targetFilename, string contentType, bool append = false)
         {
             Task task = Task.Factory.StartNew(() =>
@@ -98,6 +122,29 @@ namespace LogModule.Core
                 }
                 blob.Properties.ContentType = contentType;
                 blob.AppendTextAsync(fileContent.ToString());
+            });
+
+            await Task.WhenAll(task);
+        }
+
+        public async Task TruncateFile(string sourcePath, string sourceFilename, int maxBytes)
+        {
+            Task task = Task.Factory.StartNew(() =>
+            {
+                string sourceFullPath = Path.Join(fixPath(sourcePath), sourceFilename);
+                using (var stream = new FileStream(sourceFullPath, FileMode.Open))
+                {
+                    byte[] buffer = new byte[stream.Length];
+                    if (maxBytes < stream.Length)
+                    {
+                        stream.Read(buffer, 0, (int)stream.Length);
+                        stream.Close();
+                    }
+                    using (var fileToTruncate = new FileStream(sourceFullPath, FileMode.Truncate))
+                    {
+                        fileToTruncate.WriteAsync(buffer, (int)buffer.Length - maxBytes, buffer.Length);
+                    }
+                }
             });
 
             await Task.WhenAll(task);
