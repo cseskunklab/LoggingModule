@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -7,24 +10,154 @@ namespace LogModule.Core
 {
     public class RemoteFileIO : IRemote
     {
-        public RemoteFileIO()
-        {
+        protected readonly string accountName;
+        protected readonly string accountKey;
+        protected readonly string storageConnectionString;
 
+        public RemoteFileIO(string accountName, string accountKey)
+        {
+            this.accountName = accountName;
+            this.accountKey = accountKey;
+            this.storageConnectionString = "DefaultEndpointsProtocol=https;" + "AccountName=" + accountName + ";AccountKey=" + accountKey + ";EndpointSuffix=core.windows.net";
         }
 
         public async Task DownloadFile(string targetPath, string targetFilename, string containerName, string filename, bool append = false)
         {
-            throw new NotImplementedException();
+            Task task = Task.Factory.StartNew(() =>
+            {
+                string targetFullPath = Path.Join(fixPath(targetPath), targetFilename);
+                CloudStorageAccount account = CloudStorageAccount.Parse(storageConnectionString);
+                CloudBlobClient serviceClient = account.CreateCloudBlobClient();
+
+                var container = serviceClient.GetContainerReference(getContainerName(containerName));
+                CloudAppendBlob blob = container.GetAppendBlobReference(getFilepathForContainer(containerName, filename));
+
+                if (!append)
+                {
+                    blob.DownloadToFileAsync(targetFullPath, FileMode.Create);
+                }
+                else
+                {
+                    if (!blob.ExistsAsync().Result)
+                    {
+                        throw new Exception($"Cannot download nonexistent blob file {targetFilename}");
+                    }
+                    blob.DownloadToFileAsync(targetFullPath, FileMode.Append);
+                }
+            });
+
+            await Task.WhenAll(task);
         }
 
         public async Task UploadFile(string sourcePath, string sourceFilename, string containerName, string targetFilename, string contentType, bool append = false)
         {
-            throw new NotImplementedException();
+            Task task = Task.Factory.StartNew(() =>
+            {
+                byte[] fileContent = File.ReadAllBytes(Path.Join(fixPath(sourcePath), sourceFilename));
+                CloudStorageAccount account = CloudStorageAccount.Parse(storageConnectionString);
+                CloudBlobClient serviceClient = account.CreateCloudBlobClient();
+
+                var container = serviceClient.GetContainerReference(getContainerName(containerName));
+                container.CreateIfNotExistsAsync().Wait();
+                CloudAppendBlob blob = container.GetAppendBlobReference(getFilepathForContainer(containerName, targetFilename));
+
+                if (!append)
+                {
+                    blob.CreateOrReplaceAsync();
+                }
+                else
+                {
+                    if (!blob.ExistsAsync().Result)
+                    {
+                        throw new Exception($"Cannot append to nonexistent blob file {sourceFilename}");
+                    }
+                }
+                blob.Properties.ContentType = contentType;
+                blob.AppendTextAsync(fileContent.ToString());
+            });
+
+            await Task.WhenAll(task);
         }
 
         public async Task UploadFile(string sourcePath, string sourceFilename, string sasUri, string contentType, bool append = false)
         {
-            throw new NotImplementedException();
+            Task task = Task.Factory.StartNew(() =>
+            {
+                byte[] fileContent = File.ReadAllBytes(Path.Join(fixPath(sourcePath), sourceFilename));
+                CloudAppendBlob blob = new CloudAppendBlob(new Uri(sasUri));
+
+                if (!append)
+                {
+                    blob.CreateOrReplaceAsync();
+                }
+                else
+                {
+                    if (!blob.ExistsAsync().Result)
+                    {
+                        throw new Exception($"Cannot append to nonexistent blob file {sourceFilename}");
+                    }
+                }
+                blob.Properties.ContentType = contentType;
+                blob.AppendTextAsync(fileContent.ToString());
+            });
+
+            await Task.WhenAll(task);
         }
+
+        private static string fixPath(string sourcePath)
+        {
+            return sourcePath.IndexOf("/") + 1 == sourcePath.Length ? sourcePath : sourcePath + "/";
+        }
+
+        private static string getContainerName(string containerName)
+        {
+            string container = null;
+
+            if (!containerName.Contains('/'))
+            {
+                container = containerName;
+            }
+            else
+            {
+                string[] parts = containerName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+                container = parts[0];
+            }
+            return container;
+        }
+
+        private static string getFilepathForContainer(string containerName, string targetFilename)
+        {
+            string path = null;
+
+            if (!containerName.Contains('/'))
+            {
+                path = targetFilename;
+            }
+            else
+            {
+                string[] parts = containerName.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+
+                StringBuilder builder = new StringBuilder();
+                if (parts.Length > 1)
+                {
+                    int index = 1;
+                    while (index < parts.Length)
+                    {
+                        builder.Append(parts[index] + "/");
+                        index++;
+                    }
+                    builder.Append(targetFilename);
+                    path = builder.ToString();
+                }
+                else
+                {
+                    path = targetFilename;
+                }
+            }
+
+            return path;
+        }
+
     }
+    
 }
