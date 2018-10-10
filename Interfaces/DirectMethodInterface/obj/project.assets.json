@@ -3596,23 +3596,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mumalhot\\.nuget\\packages\\": {},
+    "C:\\Users\\v-spopla\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mumalhot\\Documents\\GitHub\\LoggingModule\\Interfaces\\DirectMethodInterface\\DirectMethodInterface.csproj",
+      "projectUniqueName": "C:\\Users\\v-spopla\\Documents\\GitHub\\LoggingModule\\Interfaces\\DirectMethodInterface\\DirectMethodInterface.csproj",
       "projectName": "DirectMethodInterface",
-      "projectPath": "C:\\Users\\mumalhot\\Documents\\GitHub\\LoggingModule\\Interfaces\\DirectMethodInterface\\DirectMethodInterface.csproj",
-      "packagesPath": "C:\\Users\\mumalhot\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mumalhot\\Documents\\GitHub\\LoggingModule\\Interfaces\\DirectMethodInterface\\obj\\",
+      "projectPath": "C:\\Users\\v-spopla\\Documents\\GitHub\\LoggingModule\\Interfaces\\DirectMethodInterface\\DirectMethodInterface.csproj",
+      "packagesPath": "C:\\Users\\v-spopla\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\v-spopla\\Documents\\GitHub\\LoggingModule\\Interfaces\\DirectMethodInterface\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\mumalhot\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\v-spopla\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3620,6 +3620,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Users\\v-spopla\\.dotnet\\NuGetFallbackFolder": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

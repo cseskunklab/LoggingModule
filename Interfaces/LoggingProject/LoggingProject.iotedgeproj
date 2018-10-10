@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>5c001d85-2253-4ac8-b3f8-7387cd5e7b37</ProjectGuid>
+    <ProjectGuid>a4ac686a-c18a-4767-b1f1-bf475e919cde</ProjectGuid>
   </PropertyGroup>
   <Import Project="AzureIoTEdgeProject.targets" />
   <ItemGroup>
