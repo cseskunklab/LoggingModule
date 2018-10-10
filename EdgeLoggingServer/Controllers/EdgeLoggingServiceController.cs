@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EdgeLoggingServer.Controllers
 {
-    [Route("[controller]/[action]")]
-    [Controller]
+    [Route("[controller]")]
+    [ApiController]
     public class EdgeLoggingServiceController : WebApiService<IEdgeLoggingService>, IEdgeLoggingService
     {
 
@@ -18,7 +18,7 @@ namespace EdgeLoggingServer.Controllers
             return Task.FromResult<string>("hello");
         }
 
-        [HttpPost]
+        [HttpPost("UploadFile")]
         public Task UploadFile(string sourcePath,
                         string sourceFilename,
                         string containerName,
@@ -30,14 +30,14 @@ namespace EdgeLoggingServer.Controllers
         }
 
 
-        [HttpPost]
-        public Task UploadFile2(string sourcePath,
+        [HttpPost("sas/UploadFile")]
+        public Task UploadFile(string sourcePath,
             string sourceFilename,
             string sasUri,
             string contentType,
             bool append = false)
         {
-            return InnerService.UploadFile2(sourcePath, sourceFilename, sasUri, contentType, append);
+            return InnerService.UploadFile(sourcePath, sourceFilename, sasUri, contentType, append);
         }
 
         [HttpGet("DownloadFile")]
@@ -46,7 +46,7 @@ namespace EdgeLoggingServer.Controllers
             return InnerService.DownloadFile(targetPath, targetFilename, containerName, filename, append);
         }
 
-        [HttpGet("DownloadFile2")]
+        [HttpGet("sas/DownloadFile")]
         public Task DownloadFile2(string targetPath, string targetFilename, string sasUri, bool append = false)
         {
             return InnerService.DownloadFile2(targetPath, targetFilename, sasUri, append);

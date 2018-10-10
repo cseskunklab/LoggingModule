@@ -14,7 +14,7 @@ namespace EdgeLoggingService
                 string contentType,
                 bool append = false);
 
-        Task UploadFile2(string sourcePath,
+        Task UploadFile(string sourcePath,
                 string sourceFilename,
                 string sasUri,
                 string contentType,
