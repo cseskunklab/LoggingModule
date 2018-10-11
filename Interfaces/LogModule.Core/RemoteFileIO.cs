@@ -88,7 +88,7 @@ namespace LogModule.Core
                 }
             }
             blob.Properties.ContentType = contentType;
-            await blob.AppendTextAsync(fileContent.ToString());
+            await blob.AppendFromByteArrayAsync(fileContent, 0, fileContent.Length);
         }
 
         public async Task UploadFile(string sourcePath, string sourceFilename, string sasUri, string contentType, bool append = false)
@@ -108,7 +108,7 @@ namespace LogModule.Core
                 }
             }
             blob.Properties.ContentType = contentType;
-            await blob.AppendTextAsync(fileContent.ToString());
+            await blob.AppendFromByteArrayAsync(fileContent, 0, fileContent.Length);
         }
 
         public async Task TruncateFile(string sourcePath, string sourceFilename, int maxBytes)
@@ -125,6 +125,7 @@ namespace LogModule.Core
                 using (var fileToTruncate = new FileStream(sourceFullPath, FileMode.Truncate))
                 {
                     await fileToTruncate.WriteAsync(buffer, (int)buffer.Length - maxBytes, buffer.Length);
+                    fileToTruncate.Close();
                 }
             }
         }
