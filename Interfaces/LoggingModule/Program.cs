@@ -9,13 +9,18 @@ namespace LoggingModule
     using System.Threading;
     using System.Threading.Tasks;
     using LogModule;
+    using LogModuleWrapper;
     using Microsoft.Azure.Devices.Client;
 
     class Program
     {
+
+        static string storageAccountName = "loggingmodulestore";
+        static string storageAccountKey = "PEY5ADgPE4Fg57f17jJyVRQJvbNU9CCrc2cf0x/8JfoNVDbuqZkkDr0A9Os2X27FNFfzv3dAirSra5pOBkzjEw==";
+
         static void Main(string[] args)
         {
-            EdgeHubWrapper.Init().Wait();
+            EdgeHubWrapper.Init(storageAccountName, storageAccountKey).Wait();
 
             // Wait until the app unloads or is cancelled
             var cts = new CancellationTokenSource();

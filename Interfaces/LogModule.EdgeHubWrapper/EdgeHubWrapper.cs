@@ -1,11 +1,9 @@
 ﻿using LogModule.Core;
 using Microsoft.Azure.Devices.Client;
-using Microsoft.Azure.Devices.Shared;
 using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace LogModuleWrapper
@@ -20,11 +18,8 @@ namespace LogModuleWrapper
             remoteFileIO = new RemoteFileIO(storageAccountName, storageAccountKey);
             localFileIO = new LocalFileIO(storageAccountName, storageAccountKey);
 
-            AmqpTransportSettings amqpSetting = new AmqpTransportSettings(TransportType.Amqp_Tcp_Only);
-            ITransportSettings[] settings = { amqpSetting };
-
             // Open a connection to the Edge runtime
-            ModuleClient ioTHubModuleClient = await ModuleClient.CreateFromEnvironmentAsync(settings);
+            ModuleClient ioTHubModuleClient = await ModuleClient.CreateFromEnvironmentAsync(TransportType.Mqtt);
             await ioTHubModuleClient.OpenAsync().ConfigureAwait(false);
 
             // Register callback to be called when a message is received by the module
@@ -60,30 +55,29 @@ namespace LogModuleWrapper
             logReceivedMessage(message);
 
             #region Checking required properties
-            if (!message.Properties.ContainsKey("sourcePath"))
+
+            if (!validateStringParams(message, "sourcePath", "sourceFilename", "targetFilename")) return MessageResponse.Abandoned;
+            if(!validateStringParams(message, "containerName"))
             {
-                Console.WriteLine("A required 'sourcePath' property is missed.");
-                return MessageResponse.Abandoned;
-            }
-            if (!message.Properties.ContainsKey("sourceFilename"))
-            {
-                Console.WriteLine("A required 'sourceFilename' property is missed.");
-                return MessageResponse.Abandoned;
-            }
-            if (!message.Properties.ContainsKey("containerName"))
-            {
-                Console.WriteLine("A required 'containerName' property is missed.");
-                return MessageResponse.Abandoned;
-            }
-            if (!message.Properties.ContainsKey("targetFilename"))
-            {
-                Console.WriteLine("A required 'targetFilename' property is missed.");
-                return MessageResponse.Abandoned;
+                if(!validateStringParams(message, "sasUri"))
+                {
+                    Console.WriteLine("'containerName' or 'sasUri' should be set.");
+                    return MessageResponse.Abandoned;
+                }
             }
 
             //Resolving values
-            if (!message.Properties.ContainsKey("contentType")) message.Properties.Add("contentType", @"application/octet-stream");
-            if (!message.Properties.ContainsKey("append")) message.Properties.Add("append", @"False");
+            if (!validateStringParams(message, "contentType"))
+            {
+                message.Properties.Add("contentType", @"application/octet-stream");
+                Console.WriteLine("'contentType' property missed. 'contentType' set to 'application/octet-stream'.");
+            }
+
+            if (!validateStringParams(message, "append"))
+            {
+                message.Properties.Add("append", @"False");
+                Console.WriteLine("'append' property missed. 'append' set to 'False'.");
+            }
             else
             {
                 bool append = false;
@@ -144,29 +138,12 @@ namespace LogModuleWrapper
             logReceivedMessage(message);
 
             #region Checking required properties
-            if (!message.Properties.ContainsKey("targetPath"))
+            if (!validateStringParams(message, "targetPath", "targetFilename", "containerName", "filename")) return MessageResponse.Abandoned;
+            if (!validateStringParams(message, "append"))
             {
-                Console.WriteLine("A required 'targetPath' property is missed.");
-                return MessageResponse.Abandoned;
+                message.Properties.Add("append", @"False");
+                Console.WriteLine("'append' property missed. 'append' set to 'False'.");
             }
-            if (!message.Properties.ContainsKey("targetFilename"))
-            {
-                Console.WriteLine("A required 'targetFilename' property is missed.");
-                return MessageResponse.Abandoned;
-            }
-            if (!message.Properties.ContainsKey("containerName"))
-            {
-                Console.WriteLine("A required 'containerName' property is missed.");
-                return MessageResponse.Abandoned;
-            }
-            if (!message.Properties.ContainsKey("filename"))
-            {
-                Console.WriteLine("A required 'filename' property is missed.");
-                return MessageResponse.Abandoned;
-            }
-
-            //Resolving values
-            if (!message.Properties.ContainsKey("append")) message.Properties.Add("append", @"False");
             else
             {
                 bool append = false;
@@ -204,16 +181,7 @@ namespace LogModuleWrapper
             logReceivedMessage(message);
 
             #region Checking required properties
-            if (!message.Properties.ContainsKey("sourcePath"))
-            {
-                Console.WriteLine("A required 'sourcePath' property is missed.");
-                return MessageResponse.Abandoned;
-            }
-            if (!message.Properties.ContainsKey("sourceFilename"))
-            {
-                Console.WriteLine("A required 'sourceFilename' property is missed.");
-                return MessageResponse.Abandoned;
-            }
+            if (!validateStringParams(message, "sourcePath", "sourceFilename")) return MessageResponse.Abandoned;
             #endregion
 
             // Process code here
@@ -241,19 +209,13 @@ namespace LogModuleWrapper
             logReceivedMessage(message);
 
             #region Checking required properties
-            if (!message.Properties.ContainsKey("sourcePath"))
-            {
-                Console.WriteLine("A required 'sourcePath' property is missed.");
-                return MessageResponse.Abandoned;
-            }
-            if (!message.Properties.ContainsKey("sourceFilename"))
-            {
-                Console.WriteLine("A required 'sourceFilename' property is missed.");
-                return MessageResponse.Abandoned;
-            }
+            if (!validateStringParams(message, "sourcePath", "sourceFilename")) return MessageResponse.Abandoned;
 
-            //Resolving values
-            if (!message.Properties.ContainsKey("append")) message.Properties.Add("append", @"False");
+            if (!validateStringParams(message, "append"))
+            {
+                message.Properties.Add("append", @"False");
+                Console.WriteLine("'append' property missed. 'append' set to 'False'.");
+            }
             else
             {
                 bool append = false;
@@ -289,16 +251,7 @@ namespace LogModuleWrapper
             logReceivedMessage(message);
 
             #region Checking required properties
-            if (!message.Properties.ContainsKey("sourcePath"))
-            {
-                Console.WriteLine("A required 'sourcePath' property is missed.");
-                return MessageResponse.Abandoned;
-            }
-            if (!message.Properties.ContainsKey("sourceFilename"))
-            {
-                Console.WriteLine("A required 'sourceFilename' property is missed.");
-                return MessageResponse.Abandoned;
-            }
+            if (!validateStringParams(message, "sourcePath", "sourceFilename")) return MessageResponse.Abandoned;
             #endregion
 
             // Process code here
@@ -334,11 +287,7 @@ namespace LogModuleWrapper
             logReceivedMessage(message);
 
             #region Checking required properties
-            if (!message.Properties.ContainsKey("sourcePath"))
-            {
-                Console.WriteLine("A required 'sourcePath' property is missed.");
-                return MessageResponse.Abandoned;
-            }
+            if (!validateStringParams(message, "sourcePath")) return MessageResponse.Abandoned;
             #endregion
 
             // Process code here
@@ -366,6 +315,30 @@ namespace LogModuleWrapper
             return MessageResponse.Completed;
         }
 
+        static bool validateStringParams(Message message, params string[] propNames)
+        {
+            foreach (var propName in propNames)
+            {
+                if (!message.Properties.ContainsKey(propName))
+                {
+                    Console.WriteLine($"A required '{propName}' property is missed.");
+                    return false;
+                    //throw new ArgumentException("A required property is missed.", propName);
+                }
+                else
+                {
+                    string propValue = message.Properties[propName];
+                    if(string.IsNullOrWhiteSpace(propValue))
+                    {
+                        Console.WriteLine($"A required '{propName}' property cannot be null or whitespace.");
+                        return false;
+                        //throw new ArgumentNullException(propName);
+                    }
+                }
+            }
+
+            return true;
+        }
         static void logReceivedMessage(Message message)
         {
             byte[] messageBytes = message.GetBytes();
