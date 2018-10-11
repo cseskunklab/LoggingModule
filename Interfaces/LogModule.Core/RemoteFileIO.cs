@@ -120,7 +120,7 @@ namespace LogModule.Core
                 }
                 using (var fileToTruncate = new FileStream(sourceFullPath, FileMode.Truncate))
                 {
-                    await fileToTruncate.WriteAsync(buffer, (int)buffer.Length - maxBytes, buffer.Length);
+                    await fileToTruncate.WriteAsync(buffer, (int)buffer.Length - maxBytes, maxBytes);
                     fileToTruncate.Close();
                 }
             }
