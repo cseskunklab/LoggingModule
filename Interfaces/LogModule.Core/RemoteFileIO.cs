@@ -19,6 +19,10 @@ namespace LogModule.Core
             this.accountKey = accountKey;
             this.storageConnectionString = "DefaultEndpointsProtocol=https;" + "AccountName=" + accountName + ";AccountKey=" + accountKey + ";EndpointSuffix=core.windows.net";
         }
+        public RemoteFileIO(string connectionString)
+        {
+            this.storageConnectionString = connectionString;
+        }
 
         public async Task DownloadFile(string targetPath, string targetFilename, string containerName, string filename, bool append = false)
         {
