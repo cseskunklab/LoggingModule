@@ -41,6 +41,16 @@ namespace LogModule.Core.Tests
             Assert.IsFalse(File.Exists(".\\test2.txt"));
         }
 
+        [TestMethod]
+        public void ListFiles()
+        {
+            var io = new LocalFileIO("foo", "bar");
+            var files = io.ListFiles(".").Result;
+
+            Assert.IsTrue(files.Length > 0);
+            Assert.IsTrue(File.Exists(files[0]));
+        }
+
         #region Helpers
 
         private static byte[] GenerateTestBytes()
