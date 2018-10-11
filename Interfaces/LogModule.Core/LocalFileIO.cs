@@ -7,6 +7,10 @@ namespace LogModule.Core
 {
     public class LocalFileIO : RemoteFileIO, ILocal
     {
+        public LocalFileIO(string connectionString) : base(connectionString)
+        {
+        }
+
         public LocalFileIO(string accountName, string accountKey) : base(accountName, accountKey)
         {
         }
