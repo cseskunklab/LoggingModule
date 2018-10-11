@@ -1,21 +1,27 @@
 using System;
 using Xunit;
+using System.IO;
 
 namespace LogModule.Core.Tests
 {
     public class LocalFileTests
     {
         [Fact]
-        public async void Should_GetNull_When_FileIsNotFound()
+        public async void Should_GetException_When_FileIsNotFound()
         {
             // arrange
             var io = new LocalFileIO("", "");
 
             // act
-            var result = await io.GetFile("/", "file.txt");
-
-            // assert
-            Assert.Equal(0, result.Length);
+            try
+            {
+                var result = await io.GetFile("/", "file.txt");
+                Assert.Equal(0, result.Length);
+            }
+            catch(FileNotFoundException e) 
+            {
+                Assert.Equal(null, null);
+            }
         }
 
         [Fact]
@@ -25,10 +31,10 @@ namespace LogModule.Core.Tests
             var io = new LocalFileIO("", "");
 
             // act
-            var result = await io.GetFile("/", "file.txt");
+            var result = await io.GetFile("/", "test.txt");
 
             // assert
-            Assert.Equal(0, result.Length);
+            Assert.Equal(2, result.Length);
         }
     }
 }
