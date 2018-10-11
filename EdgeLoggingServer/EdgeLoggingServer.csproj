@@ -5,11 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="LogModule.Core" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\EdgeLoggingService\EdgeLoggingService.csproj" />
   </ItemGroup>
 
 </Project>
