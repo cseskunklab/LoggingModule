@@ -1,29 +1,46 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace EdgeLoggingServer
 {
     public class EdgeLoggingServer
     {
-        private static IWebHost _webHost;
+        private IWebHost _webHost;
 
-        public static async Task RunAsync(string[] args)
+        
+        public EdgeLoggingServer(int port, string storageConnectionString)
         {
-            _webHost = CreateWebHostBuilder(args).Build();
-           
-            await _webHost.RunAsync();
+            _webHost = CreateWebHostBuilder(port, storageConnectionString).Build();
         }
 
-        public static async Task StopAsync(string[] args)
+        public async Task RunAsync()
+        {
+             await _webHost.RunAsync();
+        }
+
+        public async Task StartAsync()
+        {
+            await _webHost.StartAsync();
+        }
+
+        public async Task StopAsync(string[] args)
         {
             await _webHost.StopAsync();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-           WebHost.CreateDefaultBuilder(args)
+        private IWebHostBuilder CreateWebHostBuilder(int port, string storageConnectionString)
+        {
+            return WebHost.CreateDefaultBuilder()
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    var configKeys = new Dictionary<string, string>() { { "connectionString", storageConnectionString } };
+                    config.AddInMemoryCollection(configKeys);
+                })
                .UseStartup<Startup>()
                .UseKestrel(options =>
                {
@@ -34,8 +51,9 @@ namespace EdgeLoggingServer
                        new MinDataRate(bytesPerSecond: 100, gracePeriod: TimeSpan.FromSeconds(10));
                    options.Limits.MinResponseDataRate =
                        new MinDataRate(bytesPerSecond: 100, gracePeriod: TimeSpan.FromSeconds(10));
-                   options.ListenAnyIP(8080);
+                   options.ListenAnyIP(port);
 
                });
+        }
     }
 }

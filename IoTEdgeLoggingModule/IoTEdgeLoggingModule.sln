@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{34036844-64E7-43A5-9151-4AD90E180989}") = "IoTEdgeLoggingModule", "IoTEdgeLoggingModule\IoTEdgeLoggingModule.iotedgeproj", "{743354E7-1557-4B38-993E-9D27CDF99CF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EdgeLoggingModuleOneWeek", "EdgeLoggingModuleOneWeek\EdgeLoggingModuleOneWeek.csproj", "{06F99420-6688-492B-8CDD-A9AA7E0D6FAC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{743354E7-1557-4B38-993E-9D27CDF99CF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{743354E7-1557-4B38-993E-9D27CDF99CF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{743354E7-1557-4B38-993E-9D27CDF99CF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{743354E7-1557-4B38-993E-9D27CDF99CF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06F99420-6688-492B-8CDD-A9AA7E0D6FAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06F99420-6688-492B-8CDD-A9AA7E0D6FAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06F99420-6688-492B-8CDD-A9AA7E0D6FAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06F99420-6688-492B-8CDD-A9AA7E0D6FAC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1B628851-1070-4B88-94F8-CFC607FB235C}
+	EndGlobalSection
+EndGlobal
