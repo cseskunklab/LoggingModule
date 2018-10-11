@@ -1,3 +1,12 @@
+LogModule.Core
+
+[![Build status](https://dev.azure.com/cseskunklab/LoggingModule/_apis/build/status/LogModule.Core)](https://dev.azure.com/cseskunklab/LoggingModule/_build/latest?definitionId=2)
+
+
+EdgeHubWrapper
+
+[![Build status](https://dev.azure.com/cseskunklab/LoggingModule/_apis/build/status/EdgeHubWrapper)](https://dev.azure.com/cseskunklab/LoggingModule/_build/latest?definitionId=4)
+
 # Introduction 
 TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
 
