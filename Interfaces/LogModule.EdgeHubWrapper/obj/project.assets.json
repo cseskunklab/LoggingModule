@@ -107,7 +107,7 @@
           "lib/netstandard1.3/DotNetty.Transport.dll": {}
         }
       },
-      "LogModule.Core/1.0.0": {
+      "LogModule.Core/1.0.1": {
         "type": "package",
         "dependencies": {
           "WindowsAzure.Storage": "9.3.2"
@@ -2071,14 +2071,14 @@
         "lib/netstandard1.3/DotNetty.Transport.xml"
       ]
     },
-    "LogModule.Core/1.0.0": {
-      "sha512": "iSWq7sGJ/a3blzCEVl4qiQJMNDZ3ytJB3mAlb8mnV921j3x3s3h2raM3PWPwamM+9QT+FzLEj8/tH7NTSj4i7A==",
+    "LogModule.Core/1.0.1": {
+      "sha512": "0uY/laAVOR4AMMQkFVhsRDAzLwIkfjLUG+q+5zwB2WvUI3WwNkCsq6cAPawEQmxuch4CdoHf11DjW0TVoo8GTQ==",
       "type": "package",
-      "path": "logmodule.core/1.0.0",
+      "path": "logmodule.core/1.0.1",
       "files": [
         ".signature.p7s",
         "lib/netcoreapp2.1/LogModule.Core.dll",
-        "logmodule.core.1.0.0.nupkg.sha512",
+        "logmodule.core.1.0.1.nupkg.sha512",
         "logmodule.core.nuspec"
       ]
     },
@@ -6527,7 +6527,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
-      "LogModule.Core >= 1.0.0",
+      "LogModule.Core >= 1.0.1",
       "Microsoft.Azure.Devices.Client >= 1.18.0",
       "Microsoft.NETCore.App >= 2.1.0"
     ]
@@ -6576,7 +6576,7 @@
         "dependencies": {
           "LogModule.Core": {
             "target": "Package",
-            "version": "[1.0.0, )"
+            "version": "[1.0.1, )"
           },
           "Microsoft.Azure.Devices.Client": {
             "target": "Package",

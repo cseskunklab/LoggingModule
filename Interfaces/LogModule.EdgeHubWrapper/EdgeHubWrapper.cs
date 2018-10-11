@@ -15,10 +15,7 @@ namespace LogModuleWrapper
         static RemoteFileIO remoteFileIO = null;
         static LocalFileIO localFileIO = null;
 
-        static string storageAccountName = "loggingmodulestore";
-        static string storageAccountKey = "PEY5ADgPE4Fg57f17jJyVRQJvbNU9CCrc2cf0x/8JfoNVDbuqZkkDr0A9Os2X27FNFfzv3dAirSra5pOBkzjEw==";
-
-        public static async Task Init()
+        public static async Task Init(string storageAccountName, string storageAccountKey)
         {
             remoteFileIO = new RemoteFileIO(storageAccountName, storageAccountKey);
             localFileIO = new LocalFileIO(storageAccountName, storageAccountKey);
@@ -42,34 +39,6 @@ namespace LogModuleWrapper
             Console.WriteLine("EdgeHub logging module has been initialized");
         }
 
-        static async Task RefreshDesiredProperties(ModuleClient ioTHubModuleClient)
-        {
-            // Read the TemperatureThreshold value from the module twin's desired properties
-            var moduleTwin = await ioTHubModuleClient.GetTwinAsync();
-            var moduleTwinCollection = moduleTwin.Properties.Desired;
-
-            try
-            {
-                storageAccountName = moduleTwinCollection["storageAccountName"];
-            }
-            catch (ArgumentOutOfRangeException e)
-            {
-                Console.WriteLine($"Property storageAccountName not exist: {e.Message}");
-            }
-
-            try
-            {
-                storageAccountKey = moduleTwinCollection["storageAccountKey"];
-            }
-            catch (ArgumentOutOfRangeException e)
-            {
-                Console.WriteLine($"Property storageAccountKey not exist: {e.Message}");
-            }
-
-            // Attach a callback for updates to the module twin's desired properties.
-            await ioTHubModuleClient.SetDesiredPropertyUpdateCallbackAsync(OnDesiredPropertiesUpdate, null);
-        }
-
         /// <summary>
         /// This method is called whenever the module is sent a message from the EdgeHub. 
         /// It just pipe the messages without any change.
@@ -80,15 +49,51 @@ namespace LogModuleWrapper
         static async Task<MessageResponse> UploadFileMessage(Message message, object userContext)
         {
             //For test purpose only
-            message.Properties.Add("sourcePath", @"C:\");
-            message.Properties.Add("sourceFilename", @"Test.txt");
-            message.Properties.Add("containerName", @"data");
-            message.Properties.Add("targetFilename", @"Test.txt");
-            message.Properties.Add("contentType", @"text/plain");
-            message.Properties.Add("append", @"False");
+            //message.Properties.Add("sourcePath", @"C:\");
+            //message.Properties.Add("sourceFilename", @"Test.txt");
+            //message.Properties.Add("containerName", @"data");
+            //message.Properties.Add("targetFilename", @"Test.txt");
+            //message.Properties.Add("contentType", @"text/plain");
+            //message.Properties.Add("append", @"False");
             //*********************
 
             logReceivedMessage(message);
+
+            #region Checking required properties
+            if (!message.Properties.ContainsKey("sourcePath"))
+            {
+                Console.WriteLine("A required 'sourcePath' property is missed.");
+                return MessageResponse.Abandoned;
+            }
+            if (!message.Properties.ContainsKey("sourceFilename"))
+            {
+                Console.WriteLine("A required 'sourceFilename' property is missed.");
+                return MessageResponse.Abandoned;
+            }
+            if (!message.Properties.ContainsKey("containerName"))
+            {
+                Console.WriteLine("A required 'containerName' property is missed.");
+                return MessageResponse.Abandoned;
+            }
+            if (!message.Properties.ContainsKey("targetFilename"))
+            {
+                Console.WriteLine("A required 'targetFilename' property is missed.");
+                return MessageResponse.Abandoned;
+            }
+
+            //Resolving values
+            if (!message.Properties.ContainsKey("contentType")) message.Properties.Add("contentType", @"application/octet-stream");
+            if (!message.Properties.ContainsKey("append")) message.Properties.Add("append", @"False");
+            else
+            {
+                bool append = false;
+                if(!bool.TryParse(message.Properties["append"], out append))
+                {
+                    Console.WriteLine($"Failed to convert 'append' value to boolean. Value is {message.Properties["append"]}");
+                    return MessageResponse.Abandoned;
+                }
+            }
+            #endregion
 
             // Process code here
             //Read File Content
@@ -99,13 +104,13 @@ namespace LogModuleWrapper
             string sasUri = null;
             message.Properties.TryGetValue("sasUri", out sasUri);
 
-            if(string.IsNullOrEmpty(sasUri))
+            if (string.IsNullOrEmpty(sasUri))
             {
                 try
                 {
                     await remoteFileIO.UploadFile(message.Properties["sourcePath"], message.Properties["sourceFilename"], message.Properties["containerName"], message.Properties["targetFilename"], message.Properties["contentType"], bool.Parse(message.Properties["append"]));
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine($"Error uploading file to storage: {ex.Message}");
                 }
@@ -138,6 +143,41 @@ namespace LogModuleWrapper
 
             logReceivedMessage(message);
 
+            #region Checking required properties
+            if (!message.Properties.ContainsKey("targetPath"))
+            {
+                Console.WriteLine("A required 'targetPath' property is missed.");
+                return MessageResponse.Abandoned;
+            }
+            if (!message.Properties.ContainsKey("targetFilename"))
+            {
+                Console.WriteLine("A required 'targetFilename' property is missed.");
+                return MessageResponse.Abandoned;
+            }
+            if (!message.Properties.ContainsKey("containerName"))
+            {
+                Console.WriteLine("A required 'containerName' property is missed.");
+                return MessageResponse.Abandoned;
+            }
+            if (!message.Properties.ContainsKey("filename"))
+            {
+                Console.WriteLine("A required 'filename' property is missed.");
+                return MessageResponse.Abandoned;
+            }
+
+            //Resolving values
+            if (!message.Properties.ContainsKey("append")) message.Properties.Add("append", @"False");
+            else
+            {
+                bool append = false;
+                if (!bool.TryParse(message.Properties["append"], out append))
+                {
+                    Console.WriteLine($"Failed to convert 'append' value to boolean. Value is {message.Properties["append"]}");
+                    return MessageResponse.Abandoned;
+                }
+            }
+            #endregion
+
             // Process code here
             try
             {
@@ -163,6 +203,19 @@ namespace LogModuleWrapper
 
             logReceivedMessage(message);
 
+            #region Checking required properties
+            if (!message.Properties.ContainsKey("sourcePath"))
+            {
+                Console.WriteLine("A required 'sourcePath' property is missed.");
+                return MessageResponse.Abandoned;
+            }
+            if (!message.Properties.ContainsKey("sourceFilename"))
+            {
+                Console.WriteLine("A required 'sourceFilename' property is missed.");
+                return MessageResponse.Abandoned;
+            }
+            #endregion
+
             // Process code here
             try
             {
@@ -187,6 +240,31 @@ namespace LogModuleWrapper
 
             logReceivedMessage(message);
 
+            #region Checking required properties
+            if (!message.Properties.ContainsKey("sourcePath"))
+            {
+                Console.WriteLine("A required 'sourcePath' property is missed.");
+                return MessageResponse.Abandoned;
+            }
+            if (!message.Properties.ContainsKey("sourceFilename"))
+            {
+                Console.WriteLine("A required 'sourceFilename' property is missed.");
+                return MessageResponse.Abandoned;
+            }
+
+            //Resolving values
+            if (!message.Properties.ContainsKey("append")) message.Properties.Add("append", @"False");
+            else
+            {
+                bool append = false;
+                if (!bool.TryParse(message.Properties["append"], out append))
+                {
+                    Console.WriteLine($"Failed to convert 'append' value to boolean. Value is {message.Properties["append"]}");
+                    return MessageResponse.Abandoned;
+                }
+            }
+            #endregion
+
             // Process code here
             try
             {
@@ -209,6 +287,19 @@ namespace LogModuleWrapper
             //*********************
 
             logReceivedMessage(message);
+
+            #region Checking required properties
+            if (!message.Properties.ContainsKey("sourcePath"))
+            {
+                Console.WriteLine("A required 'sourcePath' property is missed.");
+                return MessageResponse.Abandoned;
+            }
+            if (!message.Properties.ContainsKey("sourceFilename"))
+            {
+                Console.WriteLine("A required 'sourceFilename' property is missed.");
+                return MessageResponse.Abandoned;
+            }
+            #endregion
 
             // Process code here
             try
@@ -242,6 +333,14 @@ namespace LogModuleWrapper
 
             logReceivedMessage(message);
 
+            #region Checking required properties
+            if (!message.Properties.ContainsKey("sourcePath"))
+            {
+                Console.WriteLine("A required 'sourcePath' property is missed.");
+                return MessageResponse.Abandoned;
+            }
+            #endregion
+
             // Process code here
             try
             {
@@ -254,7 +353,7 @@ namespace LogModuleWrapper
                 }
                 else
                 {
-                    await moduleClient.SendEventAsync("ListFilesOutput", new Message(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(content)));
+                    await moduleClient.SendEventAsync("ListFilesOutput", new Message(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(content))));
                 }
             }
             catch (Exception ex)
@@ -267,33 +366,60 @@ namespace LogModuleWrapper
             return MessageResponse.Completed;
         }
 
+        //static async Task RefreshDesiredProperties(ModuleClient ioTHubModuleClient)
+        //{
+        //    // Read the TemperatureThreshold value from the module twin's desired properties
+        //    var moduleTwin = await ioTHubModuleClient.GetTwinAsync();
+        //    var moduleTwinCollection = moduleTwin.Properties.Desired;
 
-        static Task OnDesiredPropertiesUpdate(TwinCollection desiredProperties, object userContext)
-        {
-            try
-            {
-                Console.WriteLine("Desired property change:");
-                Console.WriteLine(JsonConvert.SerializeObject(desiredProperties));
+        //    try
+        //    {
+        //        storageAccountName = moduleTwinCollection["storageAccountName"];
+        //    }
+        //    catch (ArgumentOutOfRangeException e)
+        //    {
+        //        Console.WriteLine($"Property storageAccountName not exist: {e.Message}");
+        //    }
 
-                if (desiredProperties["storageAccountName"] != null) storageAccountName = desiredProperties["storageAccountName"];
-                if (desiredProperties["storageAccountKey"] != null) storageAccountKey = desiredProperties["storageAccountKey"];
+        //    try
+        //    {
+        //        storageAccountKey = moduleTwinCollection["storageAccountKey"];
+        //    }
+        //    catch (ArgumentOutOfRangeException e)
+        //    {
+        //        Console.WriteLine($"Property storageAccountKey not exist: {e.Message}");
+        //    }
 
-            }
-            catch (AggregateException ex)
-            {
-                foreach (Exception exception in ex.InnerExceptions)
-                {
-                    Console.WriteLine();
-                    Console.WriteLine("Error when receiving desired property: {0}", exception);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine();
-                Console.WriteLine("Error when receiving desired property: {0}", ex.Message);
-            }
-            return Task.CompletedTask;
-        }
+        //    // Attach a callback for updates to the module twin's desired properties.
+        //    await ioTHubModuleClient.SetDesiredPropertyUpdateCallbackAsync(OnDesiredPropertiesUpdate, null);
+        //}
+
+        //static Task OnDesiredPropertiesUpdate(TwinCollection desiredProperties, object userContext)
+        //{
+        //    try
+        //    {
+        //        Console.WriteLine("Desired property change:");
+        //        Console.WriteLine(JsonConvert.SerializeObject(desiredProperties));
+
+        //        if (desiredProperties["storageAccountName"] != null) storageAccountName = desiredProperties["storageAccountName"];
+        //        if (desiredProperties["storageAccountKey"] != null) storageAccountKey = desiredProperties["storageAccountKey"];
+
+        //    }
+        //    catch (AggregateException ex)
+        //    {
+        //        foreach (Exception exception in ex.InnerExceptions)
+        //        {
+        //            Console.WriteLine();
+        //            Console.WriteLine("Error when receiving desired property: {0}", exception);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine();
+        //        Console.WriteLine("Error when receiving desired property: {0}", ex.Message);
+        //    }
+        //    return Task.CompletedTask;
+        //}
         static void logReceivedMessage(Message message)
         {
             byte[] messageBytes = message.GetBytes();
