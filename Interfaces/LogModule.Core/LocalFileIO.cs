@@ -7,64 +7,30 @@ namespace LogModule.Core
 {
     public class LocalFileIO : RemoteFileIO, ILocal
     {
-        //private readonly string accountName;
-        //private readonly string accountKey;
-        //private readonly string storageConnectionString;
-
-    public LocalFileIO(string accountName, string accountKey)
-    : base(accountName, accountKey)
+        public LocalFileIO(string accountName, string accountKey) : base(accountName, accountKey)
         {
-
         }
-   
-           
-
-        //public async Task DownloadFile(string targetPath, string targetFilename, string containerName, string filename, bool append = false)
-        //{
-        //    //Task task = Task.Factory.StartNew(() =>
-        //    //{
-        //    //    string targetFullPath = Path.Join(fixPath(targetPath), targetFilename);
-        //    //    CloudStorageAccount account = CloudStorageAccount.Parse(storageConnectionString);
-        //    //    CloudBlobClient serviceClient = account.CreateCloudBlobClient();
-
-        //    //    var container = serviceClient.GetContainerReference(getContainerName(containerName));
-        //    //    CloudAppendBlob blob = container.GetAppendBlobReference(getFilepathForContainer(containerName, filename));
-
-        //    //    if (!append)
-        //    //    {
-        //    //        blob.DownloadToFileAsync(targetFullPath, FileMode.Create);
-        //    //    }
-        //    //    else
-        //    //    {
-        //    //        if (!blob.ExistsAsync().Result)
-        //    //        {
-        //    //            throw new Exception($"Cannot download nonexistent blob file {targetFilename}");
-        //    //        }
-        //    //        blob.DownloadToFileAsync(targetFullPath, FileMode.Append);
-        //    //    }
-        //    //});
-
-        //    //await Task.WhenAll(task);
-        //}
 
         public async Task<byte[]> GetFile(string sourcePath, string sourceFilename)
-        {            
+        {
             Task<byte[]> task = Task.Factory.StartNew(() =>
             {
                 string path = fixPath(sourcePath) + sourceFilename;
+
                 return File.ReadAllBytes(path);
             });
 
             await Task.WhenAll(task);
+
             return task.Result;
         }
 
 
-        public async Task<string[]> ListFiles(string sourcePath, string sourceFilename)
+        public async Task<string[]> ListFiles(string sourcePath)
         {
             Task<string[]> task = Task.Factory.StartNew(() =>
             {
-                string path = fixPath(sourcePath) + sourceFilename;
+                string path = fixPath(sourcePath);
                 return Directory.GetFiles(path);
             });
 
@@ -82,61 +48,6 @@ namespace LogModule.Core
 
             await Task.WhenAll(task);
         }
-
-        //public async Task UploadFile(string sourcePath, string sourceFilename, string containerName, string targetFilename, string contentType, bool append = false)
-        //{
-        //    Task task = Task.Factory.StartNew(() =>
-        //    {
-        //        byte[] fileContent = File.ReadAllBytes(Path.Join(fixPath(sourcePath), sourceFilename));
-        //        CloudStorageAccount account = CloudStorageAccount.Parse(storageConnectionString);
-        //        CloudBlobClient serviceClient = account.CreateCloudBlobClient();
-
-        //        var container = serviceClient.GetContainerReference(getContainerName(containerName));
-        //        container.CreateIfNotExistsAsync().Wait();
-        //        CloudAppendBlob blob = container.GetAppendBlobReference(getFilepathForContainer(containerName, targetFilename));
-
-        //        if (!append)
-        //        {
-        //            blob.CreateOrReplaceAsync();
-        //        }
-        //        else
-        //        {
-        //            if (!blob.ExistsAsync().Result)
-        //            {
-        //                throw new Exception($"Cannot append to nonexistent blob file {sourceFilename}");
-        //            }
-        //        }
-        //        blob.Properties.ContentType = contentType;
-        //        blob.AppendTextAsync(fileContent.ToString());
-        //    });
-
-        //    await Task.WhenAll(task);
-        //}
-
-        //public async Task UploadFile(string sourcePath, string sourceFilename, string sasUri, string contentType, bool append = false)
-        //{
-        //    Task task = Task.Factory.StartNew(() =>
-        //    {
-        //        byte[] fileContent = File.ReadAllBytes(Path.Join(fixPath(sourcePath), sourceFilename));
-        //        CloudAppendBlob blob = new CloudAppendBlob(new Uri(sasUri));
-
-        //        if (!append)
-        //        {
-        //            blob.CreateOrReplaceAsync();
-        //        }
-        //        else
-        //        {
-        //            if (!blob.ExistsAsync().Result)
-        //            {
-        //                throw new Exception($"Cannot append to nonexistent blob file {sourceFilename}");
-        //            }
-        //        }
-        //        blob.Properties.ContentType = contentType;
-        //        blob.AppendTextAsync(fileContent.ToString());
-        //    });
-
-        //    await Task.WhenAll(task);
-        //}
 
         public async Task WriteFile(string sourcePath, string sourceFilename, byte[] body, bool append)
         {
@@ -165,7 +76,7 @@ namespace LogModule.Core
 
         private static string fixPath(string sourcePath)
         {
-            return sourcePath.IndexOf("/") + 1 == sourcePath.Length ? sourcePath : sourcePath + "/";
+            return sourcePath[sourcePath.Length - 1] == '/' ? sourcePath : sourcePath + "/";
         }
 
         private static string getContainerName(string containerName)

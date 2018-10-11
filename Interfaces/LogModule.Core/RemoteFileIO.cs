@@ -152,7 +152,7 @@ namespace LogModule.Core
 
         private static string fixPath(string sourcePath)
         {
-            return sourcePath.IndexOf("/") + 1 == sourcePath.Length ? sourcePath : sourcePath + "/";
+            return sourcePath[sourcePath.Length-1] == '/' ? sourcePath : sourcePath + "/";
         }
 
         private static string getContainerName(string containerName)

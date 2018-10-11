@@ -12,6 +12,6 @@ namespace LogModule.Core
 
         Task RemoveFile(string sourcePath, string sourceFilename);
 
-        Task<string[]> ListFiles(string sourcePath, string sourceFilename);
+        Task<string[]> ListFiles(string sourcePath);
     }
 }
