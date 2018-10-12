@@ -20,15 +20,19 @@ namespace EdgeLoggingServer
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
-        
-         
+            services.AddMvc(o =>
+            {
+                o.InputFormatters.Insert(0, new BinaryInputFormatter());
+                o.OutputFormatters.Insert(0, new BinaryOutputFormatter());
+            });
+
+
             string connectionString = _configuration["connectionString"];
 
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(connectionString);
+            //CloudStorageAccount storageAccount = CloudStorageAccount.Parse(connectionString);
 
-            services.AddTransient<ILocal>(s => new LocalFileIO(storageAccount.Credentials.AccountName, storageAccount.Credentials.SASToken));
-
+            //services.AddTransient<ILocal>(s => new LocalFileIO(storageAccount.Credentials.AccountName, storageAccount.Credentials.SASToken));
+            services.AddTransient<ILocal>(s => new LocalFileIO(connectionString));
 
         }
 
