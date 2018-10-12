@@ -51,14 +51,16 @@ namespace LogModule.Core
                     throw new Exception($"Cannot append to nonexistent file {sourceFilename}");
                 }
 
-                byte[] newline = Encoding.ASCII.GetBytes(Environment.NewLine);
                 using (var stream = new FileStream(sourceFullPath, FileMode.Append))
                 {
-                    stream.Write(newline, 0, newline.Length);
-                    stream.Write(body, 0, body.Length);
+                    await stream.WriteAsync(body, 0, body.Length);
                 }
             }
-            await File.WriteAllBytesAsync(sourceFullPath, body);
+            else
+            {
+                await File.WriteAllBytesAsync(sourceFullPath, body);
+            }
+            //await File.WriteAllBytesAsync(sourceFullPath, body);
         }
 
         private static string fixPath(string sourcePath)
