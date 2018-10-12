@@ -16,3 +16,9 @@
 
 bin/
 obj/
+<<<<<<< HEAD
+=======
+packages/
+
+Interfaces/.vs/Interfaces/DesignTimeBuild/.dtbcache
+>>>>>>> master
