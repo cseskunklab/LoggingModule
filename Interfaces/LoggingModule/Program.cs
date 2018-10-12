@@ -15,7 +15,9 @@ namespace LoggingModule
     {
         static void Main(string[] args)
         {
-            EdgeHubWrapper.Init().Wait();
+            DirectMethods.Init(null);
+
+            //EdgeHubWrapper.Init().Wait();
 
             // Wait until the app unloads or is cancelled
             var cts = new CancellationTokenSource();
