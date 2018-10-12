@@ -10,9 +10,9 @@
             "loggingOptions": "",
             "registryCredentials": {
               "registry1": {
-                "username": "cseskunklab",
-                "password": "74Xg3SRHpRjcAz8mXccSzZVYyjb/9rcj",
-                "address": "cseskunklab.azurecr.io"
+                "username": "",
+                "password": "",
+                "address": ""
               }
             }
           }
